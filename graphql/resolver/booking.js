@@ -33,7 +33,7 @@ module.exports = {
       throw new Error('cannot excute');
     }
     try {
-      const booking = await Booking.findById(args.bookingId).populate('event');
+      const booking = await Booking.find({user: req.userId});
       const event = transformEvent(booking.event);
       await Booking.deleteOne({ _id: args.bookingId });
       return event;
